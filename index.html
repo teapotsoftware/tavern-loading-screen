@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Server Loading...</title>
+<style>
+	@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+	html, body {
+		margin: 0;
+		padding: 0;
+		height: 100%;
+		width: 100%;
+		background: linear-gradient(135deg, #1a0623, #2a0f42, #14051b);
+		overflow: hidden;
+		font-family: 'Press Start 2P', cursive;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		text-align: center;
+		color: #fff;
+		z-index: -2;
+	}
+
+	h3, h5 {
+		color: #ff6ec7;
+		text-shadow: 2px 2px #000;
+	}
+
+	h1 {
+		font-size: 2em;
+		color: #ff6ec7;
+		text-shadow: 2px 2px #000;
+		margin-bottom: -5px;
+	}
+
+	.loading-bar {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 2px;
+		width: 80%;
+		max-width: 1200px;
+		margin-bottom: 50px;
+	}
+
+	.segment {
+		flex: 0 0 10px;
+		height: 20px;
+		background: #333;
+		border: 1px solid #ff6ec7;
+		transition: background 0.2s;
+	}
+
+	.segment.active {
+		background: #ff6ec7;
+	}
+
+	.rules {
+		font-size: 0.9em;
+		color: #ff6ec7;
+		text-shadow: 1px 1px #000;
+	}
+
+	.rules ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.rules li {
+		margin: 5px 0;
+	}
+
+	.particle {
+		position: absolute;
+		pointer-events: none;
+		opacity: 0.8;
+	}
+
+	.star {
+		background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><polygon fill="%2344FFBB" points="12,0 15,9 24,9 17,14 20,24 12,18 4,24 7,14 0,9 9,9"/></svg>') no-repeat center;
+		background-size: contain;
+		width: 10px;
+		height: 10px;
+		z-index: -1;
+	}
+</style>
+</head>
+<body>
+
+<h1>~ teapot's tavern ~</h1>
+<h3 id="map">sandbox on gm_construct</h3>
+<h5 id="status">Downloading...</h5>
+<div class="loading-bar" id="loadingBar"></div>
+
+<div class="rules">
+	<h3><u>da rulez</u></h3>
+	<ul>
+		<li>1. trans rights!!!!!!!!</li>
+		<li>2. be nice or get B&!!!</li>
+	</ul>
+</div>
+
+<script>
+	const gamemodeName = {
+		sandbox: "Sandbox",
+		terrortown: "TTT",
+		shoot: "BOOMSHOOT",
+		murder: "Murder",
+		prophunters: "Prop Hunt",
+		pizza: "Pizza Shop"
+	}
+	const loadingBar = document.getElementById('loadingBar');
+	const totalSegments = 50; 
+	for(let i = 0; i < totalSegments; i++){
+		const segment = document.createElement('div');
+		segment.classList.add('segment');
+		loadingBar.appendChild(segment);
+	}
+	const segments = document.querySelectorAll('.segment');
+
+	let progress = 0;
+	let progressMax = 5;
+	function updateLoading() {
+		if (progress > progressMax) progress = progressMax;
+		const filled = Math.floor((progress / progressMax) * totalSegments);
+		segments.forEach((seg, index) => {
+			if(index < filled) seg.classList.add('active');
+			else seg.classList.remove('active');
+		});
+	}
+
+	const particles = [];
+	const totalStars = 87;
+
+	function createParticle(yPosition = null) {
+		const particle = document.createElement('div');
+		particle.classList.add('particle', 'star');
+		particle.style.left = Math.random() * window.innerWidth + 'px';
+		particle.style.top = (yPosition !== null ? yPosition : -10) + 'px';
+		particle.speed = 0.2 + Math.random()*0.3;
+		particle.speedX = Math.random()*0.2 - 0.1;
+		particle.rotation = Math.random()*360;
+		particle.rotationSpeed = (Math.random()-0.5)*0.4;
+		particle.scale = 0.8 + Math.random()*2;
+		particle.style.transform = `rotate(${particle.rotation}deg) scale(${particle.scale})`;
+		particles.push(particle);
+		document.body.appendChild(particle);
+	}
+
+	for(let i = 0; i < totalStars; i++){
+		createParticle(Math.random() * window.innerHeight);
+	}
+
+	function animateParticles(){
+		particles.forEach(p => {
+			let x = parseFloat(p.style.left);
+			x += p.speedX;
+			p.style.left = x + 'px';
+			let y = parseFloat(p.style.top);
+			y += p.speed;
+			p.style.top = y + 'px';
+			p.rotation += p.rotationSpeed;
+			p.style.transform = `rotate(${p.rotation}deg) scale(${p.scale})`;
+		});
+
+		for(let i = particles.length-1;i>=0;i--){
+			if(parseFloat(particles[i].style.top) > window.innerHeight + 20){
+				particles[i].style.left = Math.random() * window.innerWidth + 'px';
+				particles[i].style.top = '-10px';
+			}
+		}
+		requestAnimationFrame(animateParticles);
+	}
+
+	animateParticles();
+
+	window.GameDetails = function( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
+		document.getElementById("map").innerHTML = gamemodeName[gamemode] + " on " + mapname;
+	}
+	window.SetFilesTotal = function( total ) {
+		console.log("files total: " + needed);
+		progressMax = total + 5;
+		updateLoading();
+	}
+	window.DownloadingFile = function( fileName ) {}
+	window.SetFilesNeeded = function( needed ) {
+		console.log("files needed: " + needed);
+		progress = (progressMax - needed);
+		updateLoading();
+	}
+	window.SetStatusChanged = function( status ) {
+		progress++;
+		updateLoading();
+		document.getElementById("status").innerHTML = status
+	}
+</script>
+
+</body>
+</html>
