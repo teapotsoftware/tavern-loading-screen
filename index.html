@@ -181,13 +181,13 @@
 		document.getElementById("map").innerHTML = gamemodeName[gamemode] + " on " + mapname;
 	}
 	window.SetFilesTotal = function( total ) {
-		console.log("files total: " + needed);
+		//console.log("files total: " + total);
 		progressMax = total + 5;
 		updateLoading();
 	}
 	window.DownloadingFile = function( fileName ) {}
 	window.SetFilesNeeded = function( needed ) {
-		console.log("files needed: " + needed);
+		//console.log("files needed: " + needed);
 		progress = (progressMax - needed);
 		updateLoading();
 	}
@@ -200,3 +200,4 @@
 
 </body>
 </html>
+
