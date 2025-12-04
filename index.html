@@ -122,7 +122,7 @@
 	const segments = document.querySelectorAll('.segment');
 
 	let progress = 0;
-	let progressMax = 5;
+	let progressMax = 7;
 	function updateLoading() {
 		if (progress > progressMax) progress = progressMax;
 		const filled = Math.floor((progress / progressMax) * totalSegments);
@@ -182,7 +182,7 @@
 	}
 	window.SetFilesTotal = function( total ) {
 		//console.log("files total: " + total);
-		progressMax = total + 5;
+		progressMax = total + 7;
 		updateLoading();
 	}
 	window.DownloadingFile = function( fileName ) {}
@@ -200,4 +200,5 @@
 
 </body>
 </html>
+
 
