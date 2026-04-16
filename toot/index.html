@@ -1,0 +1,141 @@
+<html>
+	<head>
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap" rel="stylesheet">
+		<title>Loading..</title>
+		<style>
+			.alfa-slab-one-regular {
+			  font-family: "Alfa Slab One", serif;
+			  font-weight: 400;
+			  font-style: normal;
+			}
+
+			body {
+				background-image: url('bg.jpg');
+				background-position: center;
+				background-size: cover;
+				overflow: hidden;
+				margin: 0px;
+			}
+
+			#boi {
+				position: absolute;
+				top: 72%;
+				left: 16%;
+				transform: translate(-50%, -100%) scale(1.5, 1.5);
+				z-index: 0;
+			}
+
+			#cars {
+				position: relative;
+				object-fit: cover;
+				width: 100%;
+				z-index: 1;
+			}
+
+			#logo {
+				position: absolute;
+				top: 6%;
+				left: 50%;
+				width: 15%;
+				transform: translate(-50%, -0%) scale(1.5, 1.5);
+			}
+
+			#map {
+				position: absolute;
+				transform: translate(-50%, -50%);
+				left: 50%;
+				top: 90%;
+				z-index: 1;
+				color: white;
+				font-family: "Alfa Slab One", serif;
+				font-weight: 400;
+				font-style: normal;
+				font-size: 4vw;
+			}
+
+			#map2 {
+				position: absolute;
+				transform: translate(-50%, -50%);
+				left: 50%;
+				top: 85%;
+				z-index: 1;
+				color: white;
+				font-family: "Alfa Slab One", serif;
+				font-weight: 100;
+				font-style: normal;
+				font-size: 2vw;
+			}
+		</style>
+	</head>
+	<body>
+		<img id="boi" src="boi.gif">
+		<img id="cars" src="cars.png">
+		<img id="logo" src="toot.png">
+
+		<h3 id="map2"></h3>
+		<h1 id="map"></h1>
+
+		<script type="text/javascript">
+			const cleanMapNames = {
+				"ttt_67thway_v3": "67th Way",
+				"ttt_apehouse": "Ape House",
+				"ttt_community_bowling_v5a": "Community Bowling",
+				"ttt_dolls": "Dolls",
+				"ttt_dust2_classic": "Dust II (Classic)",
+				"ttt_galleon_v2": "Galleon",
+				"ttt_hedgemaze": "Hedge Maze",
+				"ttt_island_2013": "Island",
+				"ttt_lego": "LEGO",
+				"ttt_mcdonalds_mds_v2": "McDonald's",
+				"ttt_minecraft_b5-40": "Minecraft B5",
+				"ttt_minecraftcity_v3": "Minecraft City",
+				"ttt_pcworld95_final": "PC World '95",
+				"ttt_rooftops_a2": "Rooftops",
+				"ttt_slender_v2": "Slender Facility",
+				"ttt_untextured_b3_fix": "Untextured",
+				"ttt_waterworld-notester": "Waterworld",
+				// our maps!
+				"ttt_garage": "Ringwood, New Jersey",
+				"ttt_broadway": "Broadway Castle",
+				"ttt_nicksroom_b1": "Nick's Room",
+				"ttt_bathbox": "Bath Box",
+				"ttt_bathplex": "Bathplex",
+				"ttt_booze_lagoon": "Booze Lagoon",
+				"ttt_themooooooooon": "The Mooooooooon",
+				"ttt_punkrats": "Punk Rats",
+				"ttt_aqueduct": "Aqueduct",
+				"ttt_archpark": "Arch Park"
+			}
+			let progress = 0;
+			let progressMax = 7;
+			function updateLoading() {
+				console.log(progress + "/" + progressMax)
+				if (progress < 0) progress = 0;
+				if (progress > progressMax) progress = progressMax;
+				document.getElementById("boi").style.left = (16 + (progress / progressMax) * 70) + "%"
+			}
+			window.GameDetails = function( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
+				document.getElementById("map2").innerHTML = "You're on your way to:";
+				document.getElementById("map").innerHTML = (typeof cleanMapNames[mapname] != "undefined") ? cleanMapNames[mapname] : mapname;
+			}
+			window.SetFilesTotal = function( total ) {
+				console.log("files total: " + total);
+				progressMax = total + 7;
+				updateLoading();
+			}
+			window.DownloadingFile = function( fileName ) {}
+			window.SetFilesNeeded = function( needed ) {
+				console.log("files needed: " + needed);
+				progress = (progressMax - needed) - 7;
+				updateLoading();
+			}
+			window.SetStatusChanged = function( status ) {
+				progress++;
+				updateLoading();
+			}
+		</script>
+
+	</body>
+</html>
