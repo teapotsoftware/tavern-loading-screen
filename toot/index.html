@@ -37,6 +37,7 @@
 				font-weight: 400;
 				font-style: normal;
 				font-size: 4vw;
+				color: crimson;
 			}
 
 			#map2 {
@@ -49,6 +50,7 @@
 				font-weight: 100;
 				font-style: normal;
 				font-size: 2vw;
+				color: crimson;
 			}
 		</style>
 	</head>
@@ -59,48 +61,9 @@
 		<h1 id="map"></h1>
 
 		<script type="text/javascript">
-			const cleanMapNames = {
-				"ttt_67thway_v3": "67th Way",
-				"ttt_apehouse": "Ape House",
-				"ttt_community_bowling_v5a": "Community Bowling",
-				"ttt_dolls": "Dolls",
-				"ttt_dust2_classic": "Dust II (Classic)",
-				"ttt_galleon_v2": "Galleon",
-				"ttt_hedgemaze": "Hedge Maze",
-				"ttt_island_2013": "Island",
-				"ttt_lego": "LEGO",
-				"ttt_mcdonalds_mds_v2": "McDonald's",
-				"ttt_minecraft_b5-40": "Minecraft B5",
-				"ttt_minecraftcity_v3": "Minecraft City",
-				"ttt_pcworld95_final": "PC World '95",
-				"ttt_rooftops_a2": "Rooftops",
-				"ttt_slender_v2": "Slender Facility",
-				"ttt_untextured_b3_fix": "Untextured",
-				"ttt_waterworld-notester": "Waterworld",
-				// our maps!
-				"ttt_garage": "Ringwood, New Jersey",
-				"ttt_broadway": "Broadway Castle",
-				"ttt_nicksroom_b1": "Nick's Room",
-				"ttt_bathbox": "Bath Box",
-				"ttt_bathplex": "Bathplex",
-				"ttt_booze_lagoon": "Booze Lagoon",
-				"ttt_themooooooooon": "The Mooooooooon",
-				"ttt_punkrats": "Punk Rats",
-				"ttt_aqueduct": "Aqueduct",
-				"ttt_archpark": "Arch Park",
-				"ttt_howellsburg_b3": "Howellsburg",
-				"ttt_whytemcky": "Whyte & Mackay",
-				"ttt_yeehaw_b1": "Tallahassee",
-				"ttt_vicodin_fix2": "Vicodin Labs",
-				"ttt_nymphaea_b3": "Nymphaea",
-				"ttt_estro_b6": "Estro Mall",
-				"ttt_gloam": "Camp Gloamin'",
-				"ttt_edinburgh": "Edinburgh, Scotland",
-				"ttt_bumalley": "Bum Alley",
-			}
 			window.GameDetails = function( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
 				document.getElementById("map2").innerHTML = "You're on your way to:";
-				document.getElementById("map").innerHTML = (typeof cleanMapNames[mapname] != "undefined") ? cleanMapNames[mapname] : mapname;
+				document.getElementById("map").innerHTML = mapname;
 			}
 		</script>
 
