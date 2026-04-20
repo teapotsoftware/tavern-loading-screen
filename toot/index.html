@@ -22,32 +22,16 @@
 			#boi {
 				position: absolute;
 				top: 72%;
-				left: 16%;
+				left: 43%;
 				transform: translate(-50%, -100%) scale(1.5, 1.5);
 				z-index: 0;
-			}
-
-			#cars {
-				position: relative;
-				object-fit: cover;
-				width: 100%;
-				z-index: 1;
-			}
-
-			#logo {
-				position: absolute;
-				top: 6%;
-				left: 50%;
-				width: 15%;
-				transform: translate(-50%, -0%) scale(1.5, 1.5);
 			}
 
 			#map {
 				position: absolute;
 				transform: translate(-50%, -50%);
 				left: 50%;
-				top: 90%;
-				z-index: 1;
+				top: 10%;
 				color: white;
 				font-family: "Alfa Slab One", serif;
 				font-weight: 400;
@@ -59,8 +43,7 @@
 				position: absolute;
 				transform: translate(-50%, -50%);
 				left: 50%;
-				top: 85%;
-				z-index: 1;
+				top: 5%;
 				color: white;
 				font-family: "Alfa Slab One", serif;
 				font-weight: 100;
@@ -71,8 +54,6 @@
 	</head>
 	<body>
 		<img id="boi" src="boi.gif">
-		<img id="cars" src="cars.png">
-		<img id="logo" src="toot.png">
 
 		<h3 id="map2"></h3>
 		<h1 id="map"></h1>
@@ -106,34 +87,20 @@
 				"ttt_themooooooooon": "The Mooooooooon",
 				"ttt_punkrats": "Punk Rats",
 				"ttt_aqueduct": "Aqueduct",
-				"ttt_archpark": "Arch Park"
-			}
-			let progress = 0;
-			let progressMax = 7;
-			function updateLoading() {
-				console.log(progress + "/" + progressMax)
-				if (progress < 0) progress = 0;
-				if (progress > progressMax) progress = progressMax;
-				document.getElementById("boi").style.left = (16 + (progress / progressMax) * 70) + "%"
+				"ttt_archpark": "Arch Park",
+				"ttt_howellsburg_b3": "Howellsburg",
+				"ttt_whytemcky": "Whyte & Mackay",
+				"ttt_yeehaw_b1": "Tallahassee",
+				"ttt_vicodin_fix2": "Vicodin Labs",
+				"ttt_nymphaea_b3": "Nymphaea",
+				"ttt_estro_b6": "Estro Mall",
+				"ttt_gloam": "Camp Gloamin'",
+				"ttt_edinburgh": "Edinburgh, Scotland",
+				"ttt_bumalley": "Bum Alley",
 			}
 			window.GameDetails = function( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
 				document.getElementById("map2").innerHTML = "You're on your way to:";
 				document.getElementById("map").innerHTML = (typeof cleanMapNames[mapname] != "undefined") ? cleanMapNames[mapname] : mapname;
-			}
-			window.SetFilesTotal = function( total ) {
-				console.log("files total: " + total);
-				progressMax = total + 7;
-				updateLoading();
-			}
-			window.DownloadingFile = function( fileName ) {}
-			window.SetFilesNeeded = function( needed ) {
-				console.log("files needed: " + needed);
-				progress = (progressMax - needed) - 7;
-				updateLoading();
-			}
-			window.SetStatusChanged = function( status ) {
-				progress++;
-				updateLoading();
 			}
 		</script>
 
