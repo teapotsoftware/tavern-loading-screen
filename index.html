@@ -91,16 +91,12 @@
 <body>
 
 <h1>~ teapot's tavern ~</h1>
-<h3 id="map">sandbox on gm_construct</h3>
-<h5 id="status">Downloading...</h5>
+<!--<h3 id="map">sandbox on gm_construct</h3>-->
+<h5 id="status">Loading...</h5>
 <div class="loading-bar" id="loadingBar"></div>
 
 <div class="rules">
-	<h3><u>da rulez</u></h3>
-	<ul>
-		<li>1. trans rights!!!!!!!!</li>
-		<li>2. be nice or get B&!!!</li>
-	</ul>
+	<h3><u>don't worry it's only a few kilobytes :D</u></h3>
 </div>
 
 <script>
@@ -178,14 +174,16 @@
 	animateParticles();
 
 	window.GameDetails = function( servername, serverurl, mapname, maxplayers, steamid, gamemode, volume, language ) {
-		document.getElementById("map").innerHTML = gamemodeName[gamemode] + " on " + mapname;
+		//document.getElementById("map").innerHTML = gamemodeName[gamemode] + " on " + mapname;
 	}
 	window.SetFilesTotal = function( total ) {
 		//console.log("files total: " + total);
 		progressMax = total + 7;
 		updateLoading();
 	}
-	window.DownloadingFile = function( fileName ) {}
+	window.DownloadingFile = function( fileName ) {
+		document.getElementById("status").innerHTML = "Downloading " + fileName + "...";
+	}
 	window.SetFilesNeeded = function( needed ) {
 		//console.log("files needed: " + needed);
 		progress = (progressMax - needed);
